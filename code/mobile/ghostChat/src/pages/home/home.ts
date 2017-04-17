@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { Contacts } from '@ionic-native/contacts';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
 import firebase from 'firebase';
 
@@ -11,7 +12,7 @@ export class HomePage {
 
     userProfile: any = null;
 
-    constructor(public navCtrl: NavController, private facebook: Facebook) { }
+    constructor(public navCtrl: NavController, private facebook: Facebook, private contacts: Contacts) { }
 
     facebookLogin(): void {
         /*
@@ -28,12 +29,13 @@ export class HomePage {
             https://ionicframework.com/docs/native/facebook/
 
             https://developers.facebook.com/apps/1891229357790061/settings/
-
          */
 
-        this.facebook.login(['email']).then((res) => {
-            const facebookCredential = firebase.auth.FacebookAuthProvider
-                .credential(res.authResponse.accessToken);
+        this.facebook.login(['email', 'user_friends']).then((res) => {
+
+            console.dir('login response: ', res);
+
+            const facebookCredential = firebase.auth.FacebookAuthProvider.credential(res.authResponse.accessToken);
 
             firebase.auth().signInWithCredential(facebookCredential)
                 .then((success) => {
@@ -47,5 +49,11 @@ export class HomePage {
         }).catch((error) => {
             console.dir("complete failure", error)
         });
+    }
+
+    displayContacts(): void {
+        this.contacts.find(['*']).then((people) => {
+            console.dir('contacts', people)
+       })
     }
 }
