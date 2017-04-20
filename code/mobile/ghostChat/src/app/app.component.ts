@@ -15,15 +15,6 @@ export class MyApp {
 
     constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
 
-        firebase.initializeApp({
-            apiKey: "AIzaSyAFqbQi-MZLZcdT5eLeIC--pv1FDIT6WGM",
-            authDomain: "ghost-chat-d8ef7.firebaseapp.com",
-            databaseURL: "https://ghost-chat-d8ef7.firebaseio.com",
-            projectId: "ghost-chat-d8ef7",
-            storageBucket: "ghost-chat-d8ef7.appspot.com",
-            messagingSenderId: "73086213424"
-        });
-
 
 
         platform.ready().then(() => {

@@ -1,9 +1,9 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-title>
+            Ionic Blank
+        </ion-title>
+    </ion-navbar>
 </ion-header>
 
 <ion-content padding>
@@ -26,4 +26,17 @@
             </p>
         </ion-card-content>
     </ion-card>
+
+    <ion-list>
+        <button ion-item *ngFor="let contactItem of contactItems" (click)="itemSelected(contactItem)">
+            {{ contactItem }}
+        </button>
+    </ion-list>
+
+    <ion-list>
+        <ion-item class="text" *ngFor="let item of items | async">
+            {{item.$value}}
+        </ion-item>
+    </ion-list>
+
 </ion-content>
