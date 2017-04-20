@@ -4,7 +4,6 @@ import { Contacts } from '@ionic-native/contacts';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
 
-// import firebase from 'firebase';
 
 @Component({
     selector: 'page-home',
@@ -38,7 +37,9 @@ export class HomePage {
     userProfile: any = null;
 
     constructor(public navCtrl: NavController, private facebook: Facebook, private contacts: Contacts, af: AngularFire) {
-        // this.items = af.database.list('/items');
+
+        this.items = af.database.list('/messages'); //https://github.com/angular/angularfire2/issues/558
+
      }
 
     facebookLogin(): void {
