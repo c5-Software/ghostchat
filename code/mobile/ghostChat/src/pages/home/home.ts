@@ -35,12 +35,17 @@ export class HomePage {
     items: FirebaseListObservable<any[]>;
 
     userProfile: any = null;
+    _af: AngularFire;
 
     constructor(public navCtrl: NavController, private facebook: Facebook, private contacts: Contacts, af: AngularFire) {
+        this._af = af;
+    }
 
-        this.items = af.database.list('/messages'); //https://github.com/angular/angularfire2/issues/558
+    ngOnInit() {
 
-     }
+        this.items = this._af.database.list('/messages'); //https://github.com/angular/angularfire2/issues/558
+
+    }
 
     facebookLogin(): void {
         /*
@@ -87,11 +92,16 @@ export class HomePage {
         //     this.contacts.find(['*']).then((people) => {
         //         console.dir('contacts', people)
         //    })
-
-
     }
 
     itemSelected(contactItem: string) {
         console.log("Selected Item", contactItem);
+
+        this.items.push({
+            name: 'bob',
+            text: 'suck a dick dude'
+        }).then(
+            () => console.log('message saevd')
+        )
     }
 }
